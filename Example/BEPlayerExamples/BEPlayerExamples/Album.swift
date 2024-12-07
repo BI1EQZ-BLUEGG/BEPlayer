@@ -6,7 +6,10 @@
 //
 
 import Foundation
-
+let mediaURLs1 = [
+    "https://m801.music.126.net/20241208005801/8c2481644b1dfc1d911627eac4aa7a4c/jdymusic/obj/wo3DlMOGwrbDjj7DisKw/30440974542/682b/f4d5/8f5f/8b1a60af6a9f0012cd87e7a8bb10efd5.mp3",
+    "https://m10.music.126.net/20241208005840/b56fe9c7ea46f90ac9f2f4da10ddca92/ymusic/de0f/5703/a47b/a44e45d3b04e5a13419d54da4b1c554f.mp3",
+]
 let mediaURLs = [
     "http://cdn.yixi.tv/1551767800662-3.mp4",
     "http://cdn.yixi.tv/1552224005367-3.mp4",

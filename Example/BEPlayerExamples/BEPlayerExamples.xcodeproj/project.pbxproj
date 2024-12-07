@@ -7,10 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5E05A74D2D040A71003AE812 /* BELoader in Frameworks */ = {isa = PBXBuildFile; productRef = 5E05A74C2D040A71003AE812 /* BELoader */; };
-		5E05A74F2D040A71003AE812 /* BEPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 5E05A74E2D040A71003AE812 /* BEPlayer */; };
-		5E05A76A2D040B04003AE812 /* BELoader in Frameworks */ = {isa = PBXBuildFile; productRef = 5E05A7692D040B04003AE812 /* BELoader */; };
-		5E05A76C2D040B04003AE812 /* BEPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 5E05A76B2D040B04003AE812 /* BEPlayer */; };
+		5EABCB562D0493A400F0465C /* BELoader in Frameworks */ = {isa = PBXBuildFile; productRef = 5EABCB552D0493A400F0465C /* BELoader */; };
+		5EABCB582D0493A400F0465C /* BEPlayRC in Frameworks */ = {isa = PBXBuildFile; productRef = 5EABCB572D0493A400F0465C /* BEPlayRC */; };
+		5EABCB5A2D0493A400F0465C /* BEPlayer in Frameworks */ = {isa = PBXBuildFile; productRef = 5EABCB592D0493A400F0465C /* BEPlayer */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,10 +42,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E05A76C2D040B04003AE812 /* BEPlayer in Frameworks */,
-				5E05A74F2D040A71003AE812 /* BEPlayer in Frameworks */,
-				5E05A76A2D040B04003AE812 /* BELoader in Frameworks */,
-				5E05A74D2D040A71003AE812 /* BELoader in Frameworks */,
+				5EABCB582D0493A400F0465C /* BEPlayRC in Frameworks */,
+				5EABCB5A2D0493A400F0465C /* BEPlayer in Frameworks */,
+				5EABCB562D0493A400F0465C /* BELoader in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,10 +95,9 @@
 			);
 			name = BEPlayerExamples;
 			packageProductDependencies = (
-				5E05A74C2D040A71003AE812 /* BELoader */,
-				5E05A74E2D040A71003AE812 /* BEPlayer */,
-				5E05A7692D040B04003AE812 /* BELoader */,
-				5E05A76B2D040B04003AE812 /* BEPlayer */,
+				5EABCB552D0493A400F0465C /* BELoader */,
+				5EABCB572D0493A400F0465C /* BEPlayRC */,
+				5EABCB592D0493A400F0465C /* BEPlayer */,
 			);
 			productName = BEPlayerExamples;
 			productReference = 5E3516EC2D01F04E00E0FDBA /* BEPlayerExamples.app */;
@@ -131,7 +128,7 @@
 			mainGroup = 5E3516E32D01F04E00E0FDBA;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				5E05A7682D040B04003AE812 /* XCLocalSwiftPackageReference "../../../BEPlayer" */,
+				5EABCB542D0493A400F0465C /* XCLocalSwiftPackageReference "../../../BEPlayer" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 5E3516ED2D01F04E00E0FDBA /* Products */;
@@ -365,26 +362,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		5E05A7682D040B04003AE812 /* XCLocalSwiftPackageReference "../../../BEPlayer" */ = {
+		5EABCB542D0493A400F0465C /* XCLocalSwiftPackageReference "../../../BEPlayer" */ = {
 			isa = XCLocalSwiftPackageReference;
 			relativePath = ../../../BEPlayer;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		5E05A74C2D040A71003AE812 /* BELoader */ = {
+		5EABCB552D0493A400F0465C /* BELoader */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BELoader;
 		};
-		5E05A74E2D040A71003AE812 /* BEPlayer */ = {
+		5EABCB572D0493A400F0465C /* BEPlayRC */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = BEPlayer;
+			productName = BEPlayRC;
 		};
-		5E05A7692D040B04003AE812 /* BELoader */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = BELoader;
-		};
-		5E05A76B2D040B04003AE812 /* BEPlayer */ = {
+		5EABCB592D0493A400F0465C /* BEPlayer */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = BEPlayer;
 		};

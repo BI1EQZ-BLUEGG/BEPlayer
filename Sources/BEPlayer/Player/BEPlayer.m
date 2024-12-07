@@ -217,6 +217,7 @@
         
         _player = [_BEAVPlayer new];
         
+        
         if(@available(iOS 10.0, *)){
             
             _player.automaticallyWaitsToMinimizeStalling = NO;
@@ -1032,25 +1033,15 @@
                 [self.delegate player:self volumeTo:volume];
             });
         }
-            
             break;
  
         default:
             
             [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
-            
             break;
     }
 }
 
-@end
-
-
-@implementation _BEAVPlayer
-@end
-
-
-@implementation BEPlayer (Album)
 
 - (void)setAlbume:(NSArray<BEPlayerItem *> *)albume {
     _albume = albume;
@@ -1111,3 +1102,9 @@
 }
 
 @end
+
+
+
+@implementation _BEAVPlayer
+@end
+

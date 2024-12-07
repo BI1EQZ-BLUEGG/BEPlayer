@@ -121,7 +121,7 @@ typedef NS_ENUM(NSUInteger, BEPlayerStatus) {
 /**
  播放器渲染View
  */
-@property(nonatomic, strong, readonly) UIView* playerView;
+@property(nonatomic, strong, readonly) UIView* _Nullable playerView;
 
 
 /**
@@ -293,30 +293,16 @@ typedef NS_ENUM(NSUInteger, BEPlayerStatus) {
  @param onComplete Seek完成回调
  */
 - (void)seekTo:(Float64)seekPoint onComplete:(void (^_Nullable)(void))onComplete;
-@end
-
-@interface _BEAVPlayer : AVPlayer
-
-@end
 
 
-
-
-@interface BEPlayer (Album)
 /**
  启用列表循环模式一次，即强制开启一次列表循环模式
  */
 - (void)EnableListRepeatOnce;
 
-- (BEPlayerItem *)itemCurrent;
-
-- (BEPlayerItem *)itemNext;
-
-- (BEPlayerItem *)itemPrevious;
-
-- (BEPlayerItem *)itemAtIndex:(NSInteger )index;
-
 @end
 
+@interface _BEAVPlayer : AVPlayer
+@end
 
 NS_ASSUME_NONNULL_END
