@@ -34,7 +34,9 @@ class BEPlayerViewController: UIViewController {
     
     @IBOutlet weak var buttonRetry: UIButton!
     
+    @IBOutlet weak var segmentRate: UISegmentedControl!
     
+    @IBOutlet weak var segmentMode: UISegmentedControl!
     let player: BEPlayer
     
     var album: [BEPlayerItem] = []
@@ -105,12 +107,31 @@ class BEPlayerViewController: UIViewController {
     }
     
     
-    
-    
+    @IBAction func onPlayRateChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            player.rate = 0.5
+        case 1:
+            player.rate = 0.75
+        case 2:
+            player.rate = 1.0
+        case 3:
+            player.rate = 1.5
+        case 4:
+            player.rate = 1.75
+        case 5:
+            player.rate = 2.0
+        default:
+            player.rate = 1.0
+        }
+    }
     
     func setupView() {
         buttonPlayPause.setImage(.init(systemName: "play"), for: .normal)
         buttonPlayPause.setImage(.init(systemName: "pause"), for: .selected)
+        
+        segmentMode.selectedSegmentIndex = 1
+        segmentRate.selectedSegmentIndex = 2
     }
 
     func setup() {

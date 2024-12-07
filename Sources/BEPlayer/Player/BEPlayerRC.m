@@ -25,6 +25,14 @@ static BOOL screenOn = YES;
 
 @implementation BEPlayerRC
 
++ (BEPlayerRC *)share {
+    static BEPlayerRC* instance;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        instance = [BEPlayerRC new];
+    });
+    return instance;
+}
 
 static void handleScreenStatusNotification(CFNotificationCenterRef center, void *observer, CFStringRef name, const void *object, CFDictionaryRef userInfo){
     

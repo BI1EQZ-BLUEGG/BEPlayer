@@ -1052,6 +1052,16 @@
 
 @implementation BEPlayer (Album)
 
+- (void)setAlbume:(NSArray<BEPlayerItem *> *)albume {
+    _albume = albume;
+    self.currentIndex = 0;
+    self.controller.cnt = albume.count;
+}
+
+- (void)setPlayMode:(BEPlayMode)playMode {
+    _playMode = playMode;
+}
+
 - (BEPlayerItem *)itemCurrent {
 
     NSUInteger idx = [[self controller] current];

@@ -22,10 +22,11 @@ typedef NS_ENUM(NSUInteger, BEPlayerRCAction) {
 
 @interface BEPlayerRC : NSObject
 
-
 @property(nonatomic, copy) void (^rcAction)(BEPlayerRCAction );
 
 @property(nonatomic, assign, getter= isReceivingRemoteControlEvents) BOOL receivingRemoteControlEvents;
+
++ (BEPlayerRC *)share;
 
 - (void)updateLockedScreen:(NSDictionary *)dict;
 
