@@ -9,8 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <AVFoundation/AVFoundation.h>
 #import "BEPlayerView.h"
-#import "BEPlayer+Album.h"
 #import "../Category/NSObject+BEPlayer.h"
+#import "BEPlayController.h"
 
 @interface BEPlayer () {
     /*
@@ -44,6 +44,10 @@
 @property(nonatomic, assign) CMTime currentTime;
 
 @property(nonatomic, assign) BEPlayerStatus beforeSeekingStatus;
+
+@property(nonatomic, strong) BEPlayController* controller;
+
+@property(nonatomic, assign) NSUInteger currentIndex;
 
 
 @end
@@ -90,6 +94,8 @@
         serialQueue = dispatch_queue_create("mediaplayer.bluegg.fun", DISPATCH_QUEUE_SERIAL);
         
         _autoIdleTimer = YES;
+        
+        _controller = [BEPlayController new];
         
         [self observe];
     }
@@ -1041,4 +1047,57 @@
 
 
 @implementation _BEAVPlayer
+@end
+
+
+@implementation BEPlayer (Album)
+
+- (BEPlayerItem *)itemCurrent {
+
+    NSUInteger idx = [[self controller] current];
+    
+    BEPlayerItem* item = [self itemAtIndex:idx];
+    
+    return item;
+}
+
+- (BEPlayerItem *)itemNext {
+    
+    NSUInteger idx = [[self controller] next];
+    
+    BEPlayerItem* item = [self itemAtIndex:idx];
+    
+    return item;
+}
+
+- (BEPlayerItem *)itemPrevious {
+    
+    NSUInteger idx = [[self controller] previous];
+    
+    BEPlayerItem* item = [self itemAtIndex:idx];
+    
+    return item;
+}
+
+- (BEPlayerItem *)itemAtIndex:(NSInteger )index {
+    
+    if (index >= 0 && index < self.albume.count) {
+        
+        self.currentIndex = index;
+        
+        BEPlayerItem* item = [self.albume objectAtIndex:self.currentIndex];
+        
+        self.beCurrentItem = item;
+        
+        return item;
+    }
+    
+    return nil;
+}
+
+- (void)EnableListRepeatOnce {
+    
+    [[self controller] EnableListRepeatOnce];
+}
+
 @end

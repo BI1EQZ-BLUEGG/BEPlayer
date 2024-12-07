@@ -32,13 +32,14 @@ class BEPlayerViewController: UIViewController {
     
     @IBOutlet weak var buttonNext: UIButton!
     
-    
     @IBOutlet weak var buttonRetry: UIButton!
     
     
     let player: BEPlayer
     
     var album: [BEPlayerItem] = []
+    
+//    let rc = BEPlayerRC()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         player = BEPlayer()
@@ -71,6 +72,40 @@ class BEPlayerViewController: UIViewController {
     @IBAction func onRetryAction(_ sender: UIButton) {
         player.play()
     }
+    
+    @IBAction func cleanCache(_ sender: UIButton) {
+        sender.isEnabled = false
+        BEResourceManager.share().cleanAll {
+            DispatchQueue.main.async {
+                sender.isEnabled = false
+            }
+        }
+    }
+    
+    @IBAction func onEnableLockScreenChange(_ sender: UISwitch) {
+        
+//        player.isReceivingRemoteControlEvents = sender.isOn
+    }
+    
+    @IBAction func onPlayModeChange(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            player.playMode = .listOnce
+        case 1:
+            player.playMode = .listRepeat
+        case 2:
+            player.playMode = .repeat
+        case 3:
+            player.playMode = .once
+        case 4:
+            player.playMode = .shuffle
+        default:
+            break
+        }
+    }
+    
+    
+    
     
     
     func setupView() {

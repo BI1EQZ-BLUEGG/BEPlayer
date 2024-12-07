@@ -9,6 +9,8 @@
 #import <AVFoundation/AVFoundation.h>
 #import <MediaPlayer/MediaPlayer.h>
 #import <notify.h>
+#import "BEPlayer.h"
+
 //static BEPlayer* player;
 
 static BOOL screenLocked = NO;
@@ -17,7 +19,7 @@ static BOOL screenOn = YES;
 
 @interface BEPlayerRC ()
 
-//@property(nonatomic, weak) BEPlayer* player;
+@property(nonatomic, weak) BEPlayer* player;
 
 @end
 

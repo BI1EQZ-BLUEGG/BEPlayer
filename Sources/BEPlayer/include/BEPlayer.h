@@ -10,6 +10,7 @@
 #import "BEPlayerItem.h"
 #import <CoreMedia/CoreMedia.h>
 #import <UIKit/UIKit.h>
+#import "BEPlayController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -87,6 +88,9 @@ typedef NS_ENUM(NSUInteger, BEPlayerStatus) {
 - (void)player:(BEPlayer* _Nonnull )player volumeTo:(CGFloat)volume;
 
 @end
+
+
+
 
 
 @interface BEPlayer : NSObject
@@ -178,6 +182,22 @@ typedef NS_ENUM(NSUInteger, BEPlayerStatus) {
 
 @property(nonatomic, strong, nullable) id<AVAssetResourceLoaderDelegate> resourceLoader;
 
+
+/**
+ 专辑列表
+ */
+@property(nonatomic, copy) NSArray<BEPlayerItem *>* albume;
+
+/**
+ 表示列表循环/单曲循环/随机
+ */
+@property(nonatomic, assign) BEPlayMode playMode;
+
+
+/**
+ 当前播放索引
+ */
+@property(nonatomic, assign, readonly) NSUInteger currentIndex;
 
 ///**
 // 初始化播放器
@@ -278,5 +298,25 @@ typedef NS_ENUM(NSUInteger, BEPlayerStatus) {
 @interface _BEAVPlayer : AVPlayer
 
 @end
+
+
+
+
+@interface BEPlayer (Album)
+/**
+ 启用列表循环模式一次，即强制开启一次列表循环模式
+ */
+- (void)EnableListRepeatOnce;
+
+- (BEPlayerItem *)itemCurrent;
+
+- (BEPlayerItem *)itemNext;
+
+- (BEPlayerItem *)itemPrevious;
+
+- (BEPlayerItem *)itemAtIndex:(NSInteger )index;
+
+@end
+
 
 NS_ASSUME_NONNULL_END
