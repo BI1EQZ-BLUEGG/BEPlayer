@@ -1,2 +1,2 @@
 # BEPlayer
-a player based on AVPlayer
+A player based on AVPlayer
