@@ -593,12 +593,12 @@
     //由于seek不触发loading，此处手动触发并记住seek前的状态
     self.beforeSeekingStatus = self.status;
 
-    DelegateAction(@selector(player:status:), self.delegate, ^{
-
-        self.status = BEPlayerStatusLoading;
-        
-        [self.delegate player:self status:BEPlayerStatusLoading];
-    });
+//    DelegateAction(@selector(player:status:), self.delegate, ^{
+//
+//        self.status = BEPlayerStatusLoading;
+//        
+//        [self.delegate player:self status:BEPlayerStatusLoading];
+//    });
     
     //seek前记录autoPlayWhenReady状态，±5均表示seek发起的状态变化；(loading状态调用pause会设置_autoPlayWhenReadyFlag为-7)
     _autoPlayWhenReadyFlag = self.autoPlayWhenReady ? 5 : -5;
@@ -652,6 +652,13 @@
             });
         }
     }];
+    
+    DelegateAction(@selector(player:status:), self.delegate, ^{
+
+        self.status = BEPlayerStatusLoading;
+        
+        [self.delegate player:self status:BEPlayerStatusLoading];
+    });
 }
 
 - (void)playItem:(BEPlayerItem *)item {
