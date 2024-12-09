@@ -9,11 +9,11 @@
 
 @implementation NSObject (BEPlayer)
 
-//PerformDelegate
+// PerformDelegate
 BOOL DelegateAction(SEL selector, id delegate, void (^block)(void)) {
-    
+
     if (delegate && [delegate respondsToSelector:selector]) {
-        if (dispatch_get_current_queue() == dispatch_get_main_queue()) {
+        if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(dispatch_get_main_queue())) == 0) {
             if (block) {
                 block();
                 return YES;
