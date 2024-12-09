@@ -13,13 +13,16 @@
 BOOL DelegateAction(SEL selector, id delegate, void (^block)(void)) {
     
     if (delegate && [delegate respondsToSelector:selector]) {
-        
-        if (block) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
+        if (dispatch_get_current_queue() == dispatch_get_main_queue()) {
+            if (block) {
                 block();
-            });
-            return YES;
+                return YES;
+            }
+        } else {
+            if (block) {
+                dispatch_sync(dispatch_get_main_queue(), block);
+                return YES;
+            }
         }
     }
     return NO;
