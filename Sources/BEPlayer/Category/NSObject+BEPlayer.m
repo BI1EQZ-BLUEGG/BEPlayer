@@ -9,17 +9,20 @@
 
 @implementation NSObject (BEPlayer)
 
-//PerformDelegate
+// PerformDelegate
 BOOL DelegateAction(SEL selector, id delegate, void (^block)(void)) {
-    
+
     if (delegate && [delegate respondsToSelector:selector]) {
-        
-        if (block) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                
+        if (strcmp(dispatch_queue_get_label(DISPATCH_CURRENT_QUEUE_LABEL), dispatch_queue_get_label(dispatch_get_main_queue())) == 0) {
+            if (block) {
                 block();
-            });
-            return YES;
+                return YES;
+            }
+        } else {
+            if (block) {
+                dispatch_sync(dispatch_get_main_queue(), block);
+                return YES;
+            }
         }
     }
     return NO;
