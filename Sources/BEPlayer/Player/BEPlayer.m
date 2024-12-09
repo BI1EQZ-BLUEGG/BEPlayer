@@ -124,6 +124,12 @@
     
     self.album = album;
     
+    self.currentIndex = idx;
+    
+    self.controller.current = idx;
+    
+    self.controller.cnt = album.count;
+    
     if (album.count) {
         
         [self playAtIndex:idx];
@@ -1043,13 +1049,6 @@
     }
 }
 
-
-- (void)setAlbum:(NSArray<BEPlayerItem *> *)album {
-    _album = album;
-    self.currentIndex = 0;
-    self.controller.cnt = album.count;
-}
-
 - (BEPlayMode)playMode {
     return self.controller.mode;
 }
@@ -1060,7 +1059,7 @@
 
 - (BEPlayerItem *)itemCurrent {
 
-    NSUInteger idx = [[self controller] current];
+    NSUInteger idx = self.controller.current;
     
     BEPlayerItem* item = [self itemAtIndex:idx];
     
@@ -1069,7 +1068,7 @@
 
 - (BEPlayerItem *)itemNext {
     
-    NSUInteger idx = [[self controller] next];
+    NSUInteger idx = self.controller.next;
     
     BEPlayerItem* item = [self itemAtIndex:idx];
     
@@ -1078,7 +1077,7 @@
 
 - (BEPlayerItem *)itemPrevious {
     
-    NSUInteger idx = [[self controller] previous];
+    NSUInteger idx = self.controller.previous;
     
     BEPlayerItem* item = [self itemAtIndex:idx];
     
@@ -1103,7 +1102,7 @@
 
 - (void)EnableListRepeatOnce {
     
-    [[self controller] EnableListRepeatOnce];
+    [self.controller EnableListRepeatOnce];
 }
 
 @end
