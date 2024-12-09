@@ -17,6 +17,8 @@ class BEPlayerViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    @IBOutlet weak var labelProgress: UILabel!
+    
     @IBOutlet weak var labelTime: UILabel!
 
     @IBOutlet weak var labelDuration: UILabel!
@@ -39,13 +41,17 @@ class BEPlayerViewController: UIViewController {
 
     @IBOutlet weak var segmentMode: UISegmentedControl!
 
-    let player: BEPlayer
+    lazy var player: BEPlayer = {
+        let p = BEPlayer()
+        p.delegate = self
+        p.resourceLoader = BEResourceLoader()
+        return p
+    }()
 
     var album: [BEPlayerItem] = []
 
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?)
     {
-        player = BEPlayer()
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
 
@@ -148,7 +154,7 @@ class BEPlayerViewController: UIViewController {
         buttonPlayPause.setImage(.init(systemName: "play"), for: .normal)
         buttonPlayPause.setImage(.init(systemName: "pause"), for: .selected)
 
-        segmentMode.selectedSegmentIndex = 1
+        segmentMode.selectedSegmentIndex = 0
         segmentRate.selectedSegmentIndex = 2
     }
 
@@ -159,8 +165,9 @@ class BEPlayerViewController: UIViewController {
                 url: URL(string: $0)!,
                 title: $0.components(separatedBy: "/").last ?? "-")
         })
-
-        player.updateAlbume(album, playAt: 0)
+        
+        player.playMode = .listOnce
+        player.updateAlbum(album, playAt: 0)
 
         viewBoarder.addSubview(player.playerView)
         let _ =
@@ -187,9 +194,6 @@ class BEPlayerViewController: UIViewController {
                 toItem: viewBoarder, attribute: .bottom, multiplier: 1.0,
                 constant: 0
             ).isActive = true
-
-        player.resourceLoader = BEResourceLoader()
-        player.delegate = self
         
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
@@ -234,7 +238,6 @@ extension BEPlayerViewController: BEPlayerDelegate {
             labelDuration.text = CMTimeGetSeconds(player.duration).toHMSTime
 
         case .loading:
-
             indicatorLoading.isHidden = false
             indicatorLoading.startAnimating()
             buttonPlayPause.isSelected = false
@@ -278,6 +281,7 @@ extension BEPlayerViewController: BEPlayerDelegate {
         sliderProgress.value = 0
         BEPlayRemoteCommand.shared.clean()
         BEPlayRemoteCommand.shared.update(title: "第\(index)首")
+        
+        labelProgress.text = "\(index + 1)/\(player.album.count)"
     }
-
 }

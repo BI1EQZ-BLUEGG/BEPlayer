@@ -16,6 +16,7 @@
                 <outlet property="buttonRetry" destination="RHB-uz-yAg" id="yTd-lA-aOv"/>
                 <outlet property="indicatorLoading" destination="rjM-Fh-4hD" id="mXY-Hz-49n"/>
                 <outlet property="labelDuration" destination="2WF-WD-snL" id="vxx-gs-kNo"/>
+                <outlet property="labelProgress" destination="bzq-As-PJo" id="MYZ-wQ-BcD"/>
                 <outlet property="labelTime" destination="w3E-Z1-Aif" id="5xH-lK-n59"/>
                 <outlet property="segmentMode" destination="RUH-ic-ySa" id="aVv-9x-b6r"/>
                 <outlet property="segmentRate" destination="l1C-sH-Ly3" id="stC-sp-izh"/>
@@ -97,6 +98,13 @@
                                         <action selector="previousAction:" destination="-1" eventType="touchUpInside" id="Hz9-7j-EY6"/>
                                     </connections>
                                 </button>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0/0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bzq-As-PJo">
+                                    <rect key="frame" x="335" y="25" width="26" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" systemColor="systemOrangeColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                             </subviews>
                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -232,16 +240,16 @@
         <image name="paintbrush" catalog="system" width="122" height="128"/>
         <image name="play" catalog="system" width="120" height="128"/>
         <systemColor name="linkColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

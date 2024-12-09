@@ -11,28 +11,10 @@
 #import <CoreMedia/CoreMedia.h>
 #import <UIKit/UIKit.h>
 #import "BEPlayController.h"
+#import "BEPlayerConstants.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-/**
- 播放器状态枚举
- - BEPlayerStatusUnknow: 未知状态
- - BEPlayerStatusReady: 播放器已装备完毕，已获取 Meta 信息
- - BEPlayerStatusLoading: 正在加载
- - BEPlayerStatusPlaying: 正在播放
- - BEPlayerStatusPaused: 已暂停
- - BEPlayerStatusFinished: 播放完成
- - BEPlayerStatusError: 播放出错
- */
-typedef NS_ENUM(NSUInteger, BEPlayerStatus) {
-    BEPlayerStatusUnknow,
-    BEPlayerStatusReady,
-    BEPlayerStatusLoading,
-    BEPlayerStatusPlaying,
-    BEPlayerStatusPaused,
-    BEPlayerStatusFinished,
-    BEPlayerStatusError,
-};
 
 @class BEPlayer;
 @protocol BEPlayerDelegate<NSObject>
@@ -121,7 +103,7 @@ typedef NS_ENUM(NSUInteger, BEPlayerStatus) {
 /**
  播放器渲染View
  */
-@property(nonatomic, strong, readonly) UIView* _Nullable playerView;
+@property(nonatomic, strong, readonly) UIView* playerView;
 
 
 /**
@@ -183,10 +165,8 @@ typedef NS_ENUM(NSUInteger, BEPlayerStatus) {
 @property(nonatomic, strong, nullable) id<AVAssetResourceLoaderDelegate> resourceLoader;
 
 
-/**
- 专辑列表
- */
-@property(nonatomic, copy) NSArray<BEPlayerItem *>* albume;
+/// 专辑列表
+@property(nonatomic, copy, readonly) NSArray<BEPlayerItem *>* album;
 
 /**
  表示列表循环/单曲循环/随机
@@ -228,7 +208,7 @@ typedef NS_ENUM(NSUInteger, BEPlayerStatus) {
  @param album 专辑列表
  @param idx 默认播放索引
  */
-- (void)updateAlbume:(NSArray<BEPlayerItem *> *_Nullable)album playAtIndex:(NSInteger )idx;
+- (void)updateAlbum:(NSArray<BEPlayerItem *> *_Nullable)album playAtIndex:(NSInteger )idx;
 
 /**
  播放

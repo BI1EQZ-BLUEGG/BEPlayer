@@ -6,26 +6,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BEPlayerConstants.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
-
-/**
- 播放控制模式
- 
- - BEPlayModeListRepeat: 列表循环
- - BEPlayModeRepeat: 单曲循环
- - BEPlayModeShuffle: 随机
- - BEPlayModeListOnce: 列表一次
- - BEPlayModeOnce: 单曲一次
- */
-typedef NS_ENUM(NSInteger, BEPlayMode) {
-    BEPlayModeListRepeat,
-    BEPlayModeRepeat,
-    BEPlayModeShuffle,
-    BEPlayModeListOnce,
-    BEPlayModeOnce
-};
 
 @interface BEPlayController : NSObject
 

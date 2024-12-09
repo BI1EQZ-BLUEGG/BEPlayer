@@ -49,6 +49,7 @@
 
 @property(nonatomic, assign) NSUInteger currentIndex;
 
+@property(nonatomic, copy, readwrite) NSArray<BEPlayerItem *>* album;
 
 @end
 
@@ -110,18 +111,18 @@
         
         self.delegate = delegate;
         
-        self.albume = album;
+        self.album = album;
         
-        [self updateAlbume:album playAtIndex:0];
+        [self updateAlbum:album playAtIndex:0];
     }
     return self;
 }
 
-- (void)updateAlbume:(NSArray<BEPlayerItem *> *)album playAtIndex:(NSInteger )idx {
+- (void)updateAlbum:(NSArray<BEPlayerItem *> *)album playAtIndex:(NSInteger )idx {
     
     idx = idx != -1 ? idx : 0;
     
-    self.albume = album;
+    self.album = album;
     
     if (album.count) {
         
@@ -510,7 +511,7 @@
 
 - (BOOL)playAtIndex:(NSInteger )idx {
     
-    if (idx >= 0 && idx < self.albume.count && self.beCurrentItem == [self.albume objectAtIndex:idx] && !self.error){
+    if (idx >= 0 && idx < self.album.count && self.beCurrentItem == [self.album objectAtIndex:idx] && !self.error){
         
         return YES;
     }
@@ -1043,14 +1044,18 @@
 }
 
 
-- (void)setAlbume:(NSArray<BEPlayerItem *> *)albume {
-    _albume = albume;
+- (void)setAlbum:(NSArray<BEPlayerItem *> *)album {
+    _album = album;
     self.currentIndex = 0;
-    self.controller.cnt = albume.count;
+    self.controller.cnt = album.count;
+}
+
+- (BEPlayMode)playMode {
+    return self.controller.mode;
 }
 
 - (void)setPlayMode:(BEPlayMode)playMode {
-    _playMode = playMode;
+    self.controller.mode = playMode;
 }
 
 - (BEPlayerItem *)itemCurrent {
@@ -1082,11 +1087,11 @@
 
 - (BEPlayerItem *)itemAtIndex:(NSInteger )index {
     
-    if (index >= 0 && index < self.albume.count) {
+    if (index >= 0 && index < self.album.count) {
         
         self.currentIndex = index;
         
-        BEPlayerItem* item = [self.albume objectAtIndex:self.currentIndex];
+        BEPlayerItem* item = [self.album objectAtIndex:self.currentIndex];
         
         self.beCurrentItem = item;
         
