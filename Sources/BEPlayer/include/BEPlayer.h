@@ -272,7 +272,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param seekPoint 时间值 单位秒
  @param onComplete Seek完成回调
  */
-- (void)seekTo:(Float64)seekPoint onComplete:(void (^_Nullable)(void))onComplete;
+- (void)seekTo:(Float64)seekPoint onComplete:(nullable void (^_Nullable)(void))onComplete;
 
 
 /**
