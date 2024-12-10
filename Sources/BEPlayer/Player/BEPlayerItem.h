@@ -12,12 +12,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BEPlayerItem : NSObject
 
-@property(nonatomic, strong) NSURL* mediaURL;
-@property(nonatomic, copy) NSString* mediaPath;
-@property(nonatomic, strong) NSURL* lrcURL;
-@property(nonatomic, copy) NSString* title;
-@property(nonatomic, strong) NSURL* cover;
-@property(nonatomic, copy) AVMediaType mediaType;
+@property(nonatomic, strong, nullable) NSURL* mediaURL;
+@property(nonatomic, copy, nullable) NSString* mediaPath;
+@property(nonatomic, strong, nullable) NSURL* lrcURL;
+@property(nonatomic, copy, nullable) NSString* title;
+@property(nonatomic, strong, nullable) NSURL* cover;
+@property(nonatomic, copy, nullable) AVMediaType mediaType;
 
 - (instancetype)initWithPath: (NSString *)path title: (NSString *)title;
 - (instancetype)initWithURL: (NSURL *)mediaURL title: (NSString *) title;

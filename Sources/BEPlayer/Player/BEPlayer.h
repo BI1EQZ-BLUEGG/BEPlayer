@@ -103,7 +103,7 @@ NS_ASSUME_NONNULL_BEGIN
 /**
  播放器渲染View
  */
-@property(nonatomic, strong, readonly) UIView* playerView;
+@property(nonatomic, strong, readonly, nullable) UIView* playerView;
 
 
 /**
