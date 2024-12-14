@@ -16,7 +16,7 @@ NS_ASSUME_NONNULL_BEGIN
 
  @param url 目标URL
  */
-- (void )addTask:(NSString *)url;
+- (void)addTask:(NSString *)url;
 
 /**
  添加任务
@@ -27,8 +27,13 @@ NS_ASSUME_NONNULL_BEGIN
  @param onProcess 下载进度回调
  @param onComplete 下载完成回调
  */
-- (void )addTask:(NSString *)url expected:(float)expectedPercent onTaskStatus:(void (^)(NSString* url, NSInteger status))onTaskStatusChange onProgress:(void (^)(NSString* url, uint64_t loaded, uint64_t total))onProcess onComplete:(void (^)(NSString *url, NSString *localPath, NSDictionary *, NSError*error))onComplete;
-
+- (void)addTask:(NSString *)url
+        expected:(float)expectedPercent
+    onTaskStatus:(nullable void (^)(NSString *url, NSInteger status))onTaskStatusChange
+      onProgress:(nullable void (^)(NSString *url, uint64_t loaded,
+                           uint64_t total))onProcess
+      onComplete:(nullable void (^)(NSString *url, NSString *localPath, NSDictionary *,
+                           NSError *error))onComplete;
 
 /// 添加任务
 /// @param url 目标URL
@@ -37,8 +42,13 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param onTaskStatusChange 状态回调
 /// @param onProcess 进度回调
 /// @param onComplete 完成回调
-- (void )addTask:(NSString *)url group:(NSString *)group expected:(float)expectedPercent onTaskStatus:(void (^)(NSString *, NSInteger))onTaskStatusChange onProgress:(void (^)(NSString *, uint64_t, uint64_t))onProcess onComplete:(void (^)(NSString *, NSString *, NSDictionary *, NSError *))onComplete;
-
+- (void)addTask:(NSString *)url
+           group:(NSString *)group
+        expected:(float)expectedPercent
+    onTaskStatus:(nullable void (^)(NSString *, NSInteger))onTaskStatusChange
+      onProgress:(nullable void (^)(NSString *, uint64_t, uint64_t))onProcess
+      onComplete:(nullable void (^)(NSString *, NSString *, NSDictionary *,
+                           NSError *))onComplete;
 
 /**
  按组添加任务
@@ -50,9 +60,14 @@ NS_ASSUME_NONNULL_BEGIN
  @param onSpeed 下载速度
  @param onComplete 完成回调
  */
-- (void)addGroup:(NSString *)group expected:(double)expectedPercent tasks:(NSArray<NSString *> *)urls onGroupProgress:(void (^)(NSString *, NSInteger, NSInteger, NSInteger, uint64_t, uint64_t,NSDictionary*))onGroupProgress onSpeed:(void (^)(NSInteger))onSpeed onComplete:(void (^)(NSDictionary *, NSDictionary* ))onComplete;
-
-
+- (void)addGroup:(NSString *)group
+           expected:(double)expectedPercent
+              tasks:(NSArray<NSString *> *)urls
+    onGroupProgress:(nullable void (^)(NSString *, NSInteger, NSInteger, NSInteger,
+                              uint64_t, uint64_t,
+                              NSDictionary *))onGroupProgress
+            onSpeed:(nullable void (^)(NSInteger))onSpeed
+         onComplete:(nullable void (^)(NSDictionary *, NSDictionary *))onComplete;
 
 /**
  移除任务
@@ -61,15 +76,13 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)removeTask:(NSString *)url;
 
-
 /**
  移除任务
 
  @param url 目标URL
  @param onComplete 完成回调
  */
-- (void )removeTask:(NSString *)url onComplete:(void (^)(void))onComplete;
-
+- (void)removeTask:(NSString *)url onComplete:(nullable void (^)(void))onComplete;
 
 /**
  按组或批量取消任务
@@ -78,7 +91,9 @@ NS_ASSUME_NONNULL_BEGIN
  @param groups 组集合
  @param onCompleteBlock 完成回调
  */
-- (void)removeTasks:(NSArray *)urls groups:(NSArray *)groups onComplete:(void (^)(void)) onCompleteBlock;
+- (void)removeTasks:(NSArray *)urls
+             groups:(NSArray *)groups
+         onComplete:(nullable void (^)(void))onCompleteBlock;
 
 @end
 

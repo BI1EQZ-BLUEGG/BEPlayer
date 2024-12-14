@@ -168,32 +168,33 @@ class BEPlayerViewController: UIViewController {
         
         player.playMode = .listOnce
         player.updateAlbum(album, playAt: 0)
-
-        viewBoarder.addSubview(player.playerView)
-        let _ =
-            NSLayoutConstraint(
-                item: player.playerView, attribute: .leading, relatedBy: .equal,
-                toItem: viewBoarder, attribute: .leading, multiplier: 1.0,
-                constant: 0
-            ).isActive = true
-        let _ =
-            NSLayoutConstraint(
-                item: player.playerView, attribute: .top, relatedBy: .equal,
-                toItem: viewBoarder, attribute: .top, multiplier: 1.0,
-                constant: 0
-            ).isActive = true
-        let _ =
-            NSLayoutConstraint(
-                item: player.playerView, attribute: .trailing,
-                relatedBy: .equal, toItem: viewBoarder, attribute: .trailing,
-                multiplier: 1.0, constant: 0
-            ).isActive = true
-        let _ =
-            NSLayoutConstraint(
-                item: player.playerView, attribute: .bottom, relatedBy: .equal,
-                toItem: viewBoarder, attribute: .bottom, multiplier: 1.0,
-                constant: 0
-            ).isActive = true
+        if let view = player.playerView {
+            viewBoarder.addSubview(view)
+            let _ =
+                NSLayoutConstraint(
+                    item: view, attribute: .leading, relatedBy: .equal,
+                    toItem: viewBoarder, attribute: .leading, multiplier: 1.0,
+                    constant: 0
+                ).isActive = true
+            let _ =
+                NSLayoutConstraint(
+                    item: player.playerView, attribute: .top, relatedBy: .equal,
+                    toItem: viewBoarder, attribute: .top, multiplier: 1.0,
+                    constant: 0
+                ).isActive = true
+            let _ =
+                NSLayoutConstraint(
+                    item: player.playerView, attribute: .trailing,
+                    relatedBy: .equal, toItem: viewBoarder, attribute: .trailing,
+                    multiplier: 1.0, constant: 0
+                ).isActive = true
+            let _ =
+                NSLayoutConstraint(
+                    item: player.playerView, attribute: .bottom, relatedBy: .equal,
+                    toItem: viewBoarder, attribute: .bottom, multiplier: 1.0,
+                    constant: 0
+                ).isActive = true
+        }
         
         do {
             try AVAudioSession.sharedInstance().setCategory(.playback, mode: .moviePlayback)
