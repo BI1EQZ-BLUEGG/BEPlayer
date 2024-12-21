@@ -18,30 +18,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (instancetype)share;
 
-#pragma mark - 兼容旧接口 - Public
-
-- (BOOL)preload:(NSString *)url;
-
-- (BOOL)preload:(NSString *)url
-        expected:(float)expectedPercent
-   onTaskStatus:(nullable void (^)(NSString *url, NSInteger status))onTaskStatusChange
-      onProgress:(nullable void (^)(NSString *url, uint64_t loaded,
-                           uint64_t total))onProcess
-      onComplete:(nullable void (^)(NSString *url, NSString *localPath,
-                           NSError *error))onComplete;
-
-- (BOOL)cancelPreload:(NSString *)url;
-
-- (BOOL)preloadGroup:(NSString *)groupName
-            expected:(CGFloat)expected
-               tasks:(NSArray *)urls
-     onGroupProgress:(nullable void (^)(NSString *group, NSInteger loadedCnt,
-                               NSInteger failedCnt, NSInteger totalCnt,
-                               uint64_t loadedBytes,
-                               uint64_t totalBytes))onProgress
-             onSpeed:(nullable void (^)(NSInteger))onSpeed
-          onComplete:(nullable void (^)(NSDictionary *))onComplete;
-
 #pragma mark - 下载
 /**
  下载

@@ -57,51 +57,6 @@
     [BECache share].limitCacheSize = limitCacheSize;
 }
 
-#pragma mark - 兼容旧接口 - Public
-
-- (BOOL )preload:(NSString *)url {
-    
-    [self preloadTask:url];
-    
-    return YES;
-}
-
-- (BOOL )preload:(NSString *)url expected:(float)expectedPercent onTaskStatus:(void (^)(NSString *, NSInteger))onTaskStatusChange onProgress:(void (^)(NSString *, uint64_t, uint64_t))onProcess onComplete:(void (^)(NSString *, NSString *, NSError *))onComplete {
-    
-    [self preloadTask:url expected:expectedPercent onTaskStatus:onTaskStatusChange onProgress:onProcess onComplete:^(NSString *url, NSString *localPath, NSDictionary *metric, NSError *error) {
-        
-        if (onComplete) {
-            
-            onComplete(url, localPath, error);
-        }
-    }];
-    return YES;
-}
-
-- (BOOL )cancelPreload:(NSString *)url {
-    
-    [self cancelTask:url];
-    
-    return YES;
-}
-
-- (BOOL )preloadGroup:(NSString *)groupName expected:(CGFloat)expected tasks:(NSArray *)urls onGroupProgress:(void (^)(NSString *, NSInteger, NSInteger, NSInteger, uint64_t, uint64_t))onProgress onSpeed:(void (^)(NSInteger))onSpeed onComplete:(void (^)(NSDictionary *))onComplete {
-    
-    [self preloadTasksWithGroup:groupName expected:expected tasks:urls onGroupProgress:^(NSString *group, NSInteger loadedCnt, NSInteger failedCnt, NSInteger totalCnt, uint64_t loadedBytes, uint64_t totalBytes, NSDictionary *loadedTask) {
-        if (onProgress) {
-            
-            onProgress(group, loadedCnt, failedCnt, totalCnt, loadedBytes, totalBytes);
-        }
-    } onSpeed:onSpeed onComplete:^(NSDictionary *result, NSDictionary *metrics) {
-        
-        if (onComplete) {
-            
-            onComplete(result);
-        }
-    }];
-    return YES;
-}
-
 #pragma mark - Public
 
 - (void )preloadTask:(NSString *)url {

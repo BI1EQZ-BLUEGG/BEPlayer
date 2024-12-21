@@ -11,7 +11,7 @@
 
 #define BE_Resource_Loader_Version @"0.1.0"
 
-#define DEFAULT_GROUP @"default_0x000000017026ff80"
+#define DEFAULT_GROUP @"default_bluegg"
 
 static NSString* _Nonnull MediaCacheWorkRootPath = @"MediaCache";
 
