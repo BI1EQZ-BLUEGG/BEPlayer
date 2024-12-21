@@ -26,6 +26,15 @@
                                     <action selector="push:" destination="BYZ-38-t0r" eventType="touchUpInside" id="OCf-M7-RE4"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NBF-VQ-Kes">
+                                <rect key="frame" x="200" y="373" width="82" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="preload"/>
+                                <connections>
+                                    <action selector="preloadAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="RiV-Sj-8Bn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

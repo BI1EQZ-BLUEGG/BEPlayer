@@ -138,6 +138,8 @@ dispatch_queue_t SerialQueue(void){
     
     BOOL byteRangeAccessSupported = NO;
     
+    BOOL validContentRange = NO;
+    
     long long contentLength = 0;
     
     NSRange range = NSMakeRange(0, 0);
@@ -158,6 +160,8 @@ dispatch_queue_t SerialQueue(void){
         byteRangeAccessSupported = [acceptRange isEqualToString:@"bytes"];
         
         NSString* contentRange = HTTPURLResponse.allHeaderFields[@"Content-Range"]?:@"";
+        
+        validContentRange = contentRange.length > 0;
         
         NSError* error;
         
@@ -182,8 +186,8 @@ dispatch_queue_t SerialQueue(void){
             range.length = contentLength - range.location;
         }
     }
-
-    if (!byteRangeAccessSupported) {
+    
+    if (!byteRangeAccessSupported && !validContentRange) {
         
         if (error != NULL) {
             
@@ -200,7 +204,8 @@ dispatch_queue_t SerialQueue(void){
                                          @"byteRangeAccessSupported":@(byteRangeAccessSupported),
                                          @"createTime":@(time(NULL)),
                                          @"range":[NSValue valueWithRange:range],
-                                         @"extension":extension
+                                         @"extension":extension,
+                                         @"validContentRange": @(validContentRange),
                                      }];
         return info;
     }else{

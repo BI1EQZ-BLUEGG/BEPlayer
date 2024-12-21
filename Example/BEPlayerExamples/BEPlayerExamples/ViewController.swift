@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BELoader
 
 class ViewController: UIViewController {
 
@@ -19,5 +20,8 @@ class ViewController: UIViewController {
         navigationController?.pushViewController(BEPlayerViewController(), animated: true) 
     }
     
+    @IBAction func preloadAction(_ sender: UIButton) {
+        BEResourceManager.share().preload(mediaURLs.first!)
+    }
 }
 
