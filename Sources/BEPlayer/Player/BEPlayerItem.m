@@ -9,22 +9,27 @@
 
 @implementation BEPlayerItem
 
-- (instancetype)initWithURL: (NSURL *)mediaURL title: (NSString *) title
-{
+- (instancetype)initWithURL: (NSURL *)mediaURL {
     self = [super init];
     if (self) {
         self.mediaURL = mediaURL;
-        self.title = title;
     }
     return self;
 }
 
-- (instancetype)initWithPath: (NSString *)path title: (NSString *)title
-{
+- (instancetype)initWithURL:(NSURL *)mediaURL identifier: (NSString *)identifier {
+    self = [super init];
+    if (self) {
+        self.mediaURL = mediaURL;
+        self.identifier = identifier;
+    }
+    return self;
+}
+
+- (instancetype)initWithPath: (NSString *)path {
     self = [super init];
     if (self) {
         self.mediaPath = path;
-        self.title = title;
     }
     return self;
 }

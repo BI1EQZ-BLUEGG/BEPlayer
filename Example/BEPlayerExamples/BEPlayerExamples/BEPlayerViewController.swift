@@ -16,7 +16,9 @@ class BEPlayerViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
+    
+    @IBOutlet weak var labelTitle: UILabel!
+    
     @IBOutlet weak var labelProgress: UILabel!
     
     @IBOutlet weak var labelTime: UILabel!
@@ -160,11 +162,25 @@ class BEPlayerViewController: UIViewController {
 
     func setup() {
         
-        let album = mediaURLs.compactMap({
-            BEPlayerItem(
-                url: URL(string: $0)!,
-                title: $0.components(separatedBy: "/").last ?? "-")
-        })
+        var identifiers = mediaURLs.compactMap { url in
+            return URLComponents(string: url)?.queryItems?.first(where: {$0.name == "token"})?.value
+        }
+        var album: [BEPlayerItem] = []
+        if identifiers.isEmpty {
+            for url in mediaURLs {
+                let item = BEPlayerItem(url: URL(string: url)!)
+                item.title = url
+                album.append(item)
+            }
+        } else {
+            for i in 0..<mediaURLs.count {
+                let url = mediaURLs[i]
+                let identifier = identifiers[i]
+                let item = BEPlayerItem(url: URL(string: url)!, identifier: identifier)
+                item.title = identifier + "@" + url
+                album.append(item)
+            }
+        }
         
         player.playMode = .listOnce
         player.updateAlbum(album, playAt: 0)
@@ -284,5 +300,7 @@ extension BEPlayerViewController: BEPlayerDelegate {
         BEPlayRemoteCommand.shared.update(title: "第\(index)首")
         
         labelProgress.text = "\(index + 1)/\(player.album.count)"
+        
+        labelTitle.text = player.beCurrentItem?.title ?? "-"
     }
 }

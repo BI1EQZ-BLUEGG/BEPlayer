@@ -409,19 +409,9 @@ didReceiveResponse:(NSURLResponse *)response
         [result setValue:[NSString stringWithFormat:@"%@:%@",metric.localAddress, metric.localPort] forKey:@"local_addr"];
     }
     
-    //TODO:待打包机升级XCode升级后，直接调用；
     if (@available(iOS 14.0, *)) {
         
-        NSString *domainResolutionProtocol;
-        
-        if ([metric respondsToSelector:@selector(domainResolutionProtocol)]) {
-            
-            NSNumber* p = [metric valueForKeyPath:@"domainResolutionProtocol"];
-            
-            domainResolutionProtocol = ntMap[@"dns_protocol"][p]?:[NSString stringWithFormat:@"%@", p];
-        }
-        [result setValue:domainResolutionProtocol forKey:@"dns_protocol"];
-//        [result setValue:ntMap[@"dns_protocol"][@(metric.domainResolutionProtocol)]?:@(metric.domainResolutionProtocol) forKey:@"dns_protocol"];
+        [result setValue:ntMap[@"dns_protocol"][@(metric.domainResolutionProtocol)]?:@(metric.domainResolutionProtocol) forKey:@"dns_protocol"];
     }
     [self.model.taskDesc.networkMetrics addObject:result];
     

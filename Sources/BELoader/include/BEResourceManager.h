@@ -19,65 +19,22 @@ NS_ASSUME_NONNULL_BEGIN
 + (instancetype)share;
 
 #pragma mark - 下载
-/**
- 下载
 
- @param url URL
- */
-- (void)preloadTask:(NSString *)url;
+- (void)preload: (NSString *)url
+     identifier: (NSString *)identifier
+       expected: (float) expected
+          group: (NSString *)group
+         status: (nullable void (^)(NSString *url, NSInteger status))onStatus
+       progress: (nullable void (^)(NSString *url, uint64_t loadedBytes, uint64_t totalBytes))onProgress
+       complete: (nullable void (^)(NSString *url, NSString *path, NSDictionary *metric, NSError *error))onComplete;
 
-/**
- 下载
- @param url URL
- @param expectedPercent 下载长度比例
- @param onTaskStatusChange 任务状态变化
- @param onProcess 进度回调
- @param onComplete 完成回调
- */
-- (void)preloadTask:(NSString *)url
-           expected:(float)expectedPercent
-       onTaskStatus:(nullable void (^)(NSString *url,
-                              NSInteger status))onTaskStatusChange
-         onProgress:(nullable void (^)(NSString *url, uint64_t loaded,
-                              uint64_t total))onProcess
-         onComplete:(nullable void (^)(NSString *url, NSString *localPath,
-                              NSDictionary *metric, NSError *error))onComplete;
-
-/// 下载
-/// @param url URL
-/// @param group 组
-/// @param expectedPercent 下载长度比例
-/// @param onTaskStatusChange 任务状态回调
-/// @param onProcess 进度回调
-/// @param onComplete 完成回调
-- (void)preloadTask:(NSString *)url
-              group:(NSString *)group
-           expected:(float)expectedPercent
-       onTaskStatus:(nullable void (^)(NSString *, NSInteger))onTaskStatusChange
-         onProgress:(nullable void (^)(NSString *, uint64_t, uint64_t))onProcess
-         onComplete:(nullable void (^)(NSString *url, NSString *localPath,
-                              NSDictionary *metric, NSError *error))onComplete;
-/**
- 组任务添加
-
- @param group 组名/标识符
- @param expectedPercent 预期下载长度(0-1)
- @param urls urls数组
- @param onGroupProgress 组任务进度回调
- @param onSpeed 组任务下载速度
- @param onComplete 组任务完成回调
- */
-- (void)preloadTasksWithGroup:(NSString *)group
-                     expected:(double)expectedPercent
-                        tasks:(NSArray<NSString *> *)urls
-              onGroupProgress:
-                  (nullable void (^)(NSString *group, NSInteger loadedCnt,
-                            NSInteger failedCnt, NSInteger totalCnt,
-                            uint64_t loadedBytes, uint64_t totalBytes,
-                            NSDictionary *loadedTask))onGroupProgress
-                      onSpeed:(nullable void (^)(NSInteger bps))onSpeed
-                   onComplete:(nullable void (^)(NSDictionary *result,
-                                        NSDictionary *metrics))onComplete;
+- (void)preloadGroup: (NSString *)group
+                urls: (NSArray<NSString *> *)urls
+         identifiers: (NSArray<NSString *> *)identifiers
+            expected: (float)expected
+            progress: (nullable void (^)(NSString *group, NSInteger loadedCount, NSInteger failedCount, NSInteger totalCount, uint64_t loaderBytes, uint64_t totalBytes, NSDictionary *loadedTask))onProgress
+               speed: (nullable void (^)(NSInteger bps))onSpeed
+            complete: (nullable void (^)(NSDictionary *result, NSDictionary *metrics))onComplete;
 
 #pragma mark - 取消下载
 /**
@@ -93,7 +50,8 @@ NS_ASSUME_NONNULL_BEGIN
  @param url 目标URL
  @param onCompleteBlock 完成Block
  */
-- (void)cancelTask:(NSString *)url onComplete:(nullable void (^)(void))onCompleteBlock;
+- (void)cancelTask:(NSString *)url
+        onComplete:(nullable void (^)(void))onCompleteBlock;
 
 /// 按组或一组URL取消任务
 /// @param urls URL集合

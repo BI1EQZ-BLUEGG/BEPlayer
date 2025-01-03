@@ -11,63 +11,38 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BEDownloader : NSObject
 
-/**
- 添加
-
- @param url 目标URL
- */
-- (void)addTask:(NSString *)url;
-
-/**
- 添加任务
-
- @param url 目标URL
- @param expectedPercent 期望下载百分比(值为0-1)。
- @param onTaskStatusChange 任务状态回调
- @param onProcess 下载进度回调
- @param onComplete 下载完成回调
- */
-- (void)addTask:(NSString *)url
-        expected:(float)expectedPercent
-    onTaskStatus:(nullable void (^)(NSString *url, NSInteger status))onTaskStatusChange
-      onProgress:(nullable void (^)(NSString *url, uint64_t loaded,
-                           uint64_t total))onProcess
-      onComplete:(nullable void (^)(NSString *url, NSString *localPath, NSDictionary *,
-                           NSError *error))onComplete;
-
-/// 添加任务
-/// @param url 目标URL
-/// @param group 组
-/// @param expectedPercent 期望百分比（0-1）
+/// 添加单个任务
+/// @param url 资源 URL
+/// @param identifier 自定义标识符
+/// @param expectedPercent 期望下载长度（0.0-0.1）
+/// @param groupName 组名
 /// @param onTaskStatusChange 状态回调
 /// @param onProcess 进度回调
 /// @param onComplete 完成回调
 - (void)addTask:(NSString *)url
-           group:(NSString *)group
-        expected:(float)expectedPercent
-    onTaskStatus:(nullable void (^)(NSString *, NSInteger))onTaskStatusChange
-      onProgress:(nullable void (^)(NSString *, uint64_t, uint64_t))onProcess
-      onComplete:(nullable void (^)(NSString *, NSString *, NSDictionary *,
-                           NSError *))onComplete;
+     identifier:(NSString *)identifier
+       expected:(float)expectedPercent
+          group:(NSString *)groupName
+   onTaskStatus:(void (^)(NSString *url, NSInteger status))onTaskStatusChange
+     onProgress:(void (^)(NSString *url, uint64_t loadedBytes, uint64_t totalBytes))onProcess
+     onComplete:(void (^)(NSString *url, NSString *path, NSDictionary *metric, NSError *error))onComplete;
 
-/**
- 按组添加任务
 
- @param group 组名标识
- @param expectedPercent 预期下载长度(0-1)
- @param urls URL数组
- @param onGroupProgress 组任务下载进度
- @param onSpeed 下载速度
- @param onComplete 完成回调
- */
+/// 添加一组任务
+/// @param group 组名
+/// @param urls 资源数组
+/// @param identifiers 自定义标识数组
+/// @param expectedPercent 期望加载长度（0.0－1.0）
+/// @param onGroupProgress 组进度回调
+/// @param onGroupSpeed 组下载速度回调
+/// @param onGroupComplete 组完成回调
 - (void)addGroup:(NSString *)group
-           expected:(double)expectedPercent
-              tasks:(NSArray<NSString *> *)urls
-    onGroupProgress:(nullable void (^)(NSString *, NSInteger, NSInteger, NSInteger,
-                              uint64_t, uint64_t,
-                              NSDictionary *))onGroupProgress
-            onSpeed:(nullable void (^)(NSInteger))onSpeed
-         onComplete:(nullable void (^)(NSDictionary *, NSDictionary *))onComplete;
+           tasks:(NSArray<NSString *> *)urls
+     identifiers:(NSArray<NSString *> *)identifiers
+        expected:(double)expectedPercent
+ onGroupProgress:(void (^)(NSString *, NSInteger, NSInteger, NSInteger, uint64_t, uint64_t, NSDictionary *))onGroupProgress
+         onSpeed:(void (^)(NSInteger))onGroupSpeed
+      onComplete:(void (^)(NSDictionary *, NSDictionary *))onGroupComplete;
 
 /**
  移除任务
@@ -91,9 +66,7 @@ NS_ASSUME_NONNULL_BEGIN
  @param groups 组集合
  @param onCompleteBlock 完成回调
  */
-- (void)removeTasks:(NSArray *)urls
-             groups:(NSArray *)groups
-         onComplete:(nullable void (^)(void))onCompleteBlock;
+- (void)removeTasks:(NSArray *)urls groups:(NSArray *)groups onComplete:(nullable void (^)(void))onCompleteBlock;
 
 @end
 

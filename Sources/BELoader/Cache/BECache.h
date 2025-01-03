@@ -101,7 +101,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// @param files 同上
 /// @param groups 同上
 /// @param onComplete 完成回调
-+ (void)ae_cleanCacheFiles:(NSArray * _Nullable)files orGroups:(NSArray * _Nullable)groups onComplete:(void (^)(void))onComplete;
++ (void)cleanCacheFiles:(NSArray * _Nullable)files orGroups:(NSArray * _Nullable)groups onComplete:(void (^)(void))onComplete;
 
 @end
 

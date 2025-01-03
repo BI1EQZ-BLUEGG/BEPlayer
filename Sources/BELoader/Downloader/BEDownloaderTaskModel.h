@@ -34,7 +34,6 @@ typedef NS_ENUM(NSInteger, BEDownloaderTaskStatus) {
  */
 @property(nonatomic, copy) NSString* localPath;
 
-
 /**
  期望下载比率,0~1，默认1
  */
@@ -45,12 +44,15 @@ typedef NS_ENUM(NSInteger, BEDownloaderTaskStatus) {
  */
 @property(nonatomic, copy) NSString* key;
 
+/**
+ 标识符，用户自定义标识，如果有值且不为空，则使用此字段，不使用 key
+ */
+@property(nonatomic, copy) NSString* identifier;
 
 /**
  任务状态
  */
 @property(nonatomic, assign)BEDownloaderTaskStatus status;
-
 
 /**
  出错时记录错误

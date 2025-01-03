@@ -150,10 +150,10 @@
 
         [self.handlerSet.groupSpeedHandlers addObject:groupSpeedBlock];
         
-        if (self.handlerSet.groupSpeedHandlers.count > 0) {
-            
-            [self startSpeedTimer];
-        }
+//        if (self.handlerSet.groupSpeedHandlers.count > 0) {
+//            
+//            [self startSpeedTimer];
+//        }
         
         if (!_groupSpeedBlock) {
             
@@ -216,12 +216,12 @@
     
     if (taskModel.error) {
         
-        respData = @{@"url":taskModel.url, @"error":@{@"code":@(taskModel.error.code), @"msg":taskModel.error.localizedDescription}};
+        respData = @{@"url":taskModel.url, @"identifier":taskModel.identifier ?:@"", @"error":@{@"code":@(taskModel.error.code), @"msg":taskModel.error.localizedDescription}};
         
         [self.failedTask addObject:respData];
     }else{
         
-        respData = @{@"url":taskModel.url, @"filePath":taskModel.localPath, @"totalSize":@(taskModel.totalLength)};
+        respData = @{@"url":taskModel.url, @"identifier":taskModel.identifier ?:@"", @"filePath":taskModel.localPath, @"totalSize":@(taskModel.totalLength)};
         
         [self.loadedTask addObject:respData];
     }
@@ -243,26 +243,34 @@
             
             NSMutableArray* tmp = [[NSMutableArray alloc] initWithArray:self.refUrls copyItems:YES];
             
-            for (int idx = 0; idx < self.refUrls.count; idx++) {
-                
-                NSString* url = self.refUrls[idx];
-                
-                NSString* key = [BETool md5:url];
+            NSMutableDictionary* orderMap = [NSMutableDictionary new];
+            
+            for (int i = 0; i < self.refUrls.count; i++) {
+                orderMap[self.refUrls[i]] = @(i);
+            }
+            
+            for (NSString* key in self.allTask) {
                 
                 BEDownloaderTaskModel* obj = self.allTask[key];
                 
-                //返回数据
-                if (obj.error) {
+                if (orderMap[obj.url]) {
                     
-                    [tmp replaceObjectAtIndex:idx withObject:@{@"url":obj.url, @"error":@{@"code":@(obj.error.code), @"msg":obj.error.localizedDescription}}];
-                }else{
+                    NSInteger idx = [orderMap[obj.url] integerValue];
                     
-                    [tmp replaceObjectAtIndex:idx withObject:@{@"url":obj.url, @"filePath":obj.localPath, @"totalSize":@(obj.totalLength)}];
-                }
-                //网络指标数据
-                if (!metrics[url]) {
+                    //返回数据
+                    if (obj.error) {
+                        
+                        [tmp replaceObjectAtIndex:idx withObject:@{@"url":obj.url, @"identifier":obj.identifier ?:@"", @"error":@{@"code":@(obj.error.code), @"msg":obj.error.localizedDescription}}];
+                    }else{
+                        
+                        [tmp replaceObjectAtIndex:idx withObject:@{@"url":obj.url, @"identifier":obj.identifier ?:@"", @"filePath":obj.localPath, @"totalSize":@(obj.totalLength)}];
+                    }
                     
-                    [metrics setValue:@{@"metric":obj.taskDesc.metric, @"metricDetail":obj.taskDesc.networkMetrics} forKey:url];
+                    //网络指标数据
+                    if (!metrics[obj.url]) {
+                        
+                        [metrics setValue:@{@"metric":obj.taskDesc.metric, @"metricDetail":obj.taskDesc.networkMetrics} forKey:obj.url];
+                    }
                 }
             }
             self.groupComplete(@{@"loaded":[self.loadedTask copy], @"failed": [self.failedTask copy], @"all":[tmp copy]}, [metrics copy]);

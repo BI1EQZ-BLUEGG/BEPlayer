@@ -184,7 +184,7 @@
     
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
-    [self ae_cleanCacheFiles:nil orGroups:nil onComplete:^{
+    [self cleanCacheFiles:nil orGroups:nil onComplete:^{
         
         dispatch_semaphore_signal(semaphore);
     }];
@@ -194,34 +194,34 @@
 
 + (void )cleanAll:(void(^)(void))onComplete {
     
-    [self ae_cleanCacheFiles:nil orGroups:nil onComplete:onComplete];
+    [self cleanCacheFiles:nil orGroups:nil onComplete:onComplete];
 }
 
 + (void)cleanCacheFiles:(NSArray *)files orGroups:(NSArray *)groups {
     
     dispatch_semaphore_t semaphore = dispatch_semaphore_create(0);
     
-    [self ae_cleanCacheFiles:files orGroups:groups onComplete:^{
+    [self cleanCacheFiles:files orGroups:groups onComplete:^{
         
         dispatch_semaphore_signal(semaphore);
     }];
     dispatch_semaphore_wait(semaphore, dispatch_time(DISPATCH_TIME_NOW, 200*NSEC_PER_MSEC));
 }
 
-+ (void)ae_cleanCacheFiles:(NSArray * _Nullable )files orGroups:(NSArray * _Nullable )groups onComplete:(void (^)(void))onComplete{
++ (void)cleanCacheFiles:(NSArray * _Nullable )files orGroups:(NSArray * _Nullable )groups onComplete:(void (^)(void))onComplete{
     
     __weak typeof(self) ws = self;
 
     dispatch_async(SerialQueue(), ^{
 
-        [ws _internal_ae_cleanCacheFiles:files orGroups:groups onComplete:onComplete];
+        [ws _internalCleanCacheFiles:files orGroups:groups onComplete:onComplete];
     });
 }
 
 
 #pragma mark - Internal
 
-+ (void)_internal_ae_cleanCacheFiles:(NSArray *)files orGroups:(NSArray *)groups onComplete:(void (^)(void))onComplete {
++ (void)_internalCleanCacheFiles:(NSArray *)files orGroups:(NSArray *)groups onComplete:(void (^)(void))onComplete {
     
     NSMutableDictionary* fileAndGroups = [[NSMutableDictionary alloc] init];
 

@@ -122,6 +122,26 @@
     
     idx = idx != -1 ? idx : 0;
     
+    for (BEPlayerItem* item in album) {
+        // 如果配置了 identifier，则将其追加到 URL 参数中，用于 ResourceLoader 中解析标识符
+        NSString* identifier = item.identifier;
+        
+        if ([identifier isKindOfClass:[NSString class]] && identifier.length > 0) {
+            
+            NSURLComponents* components = [NSURLComponents componentsWithURL:item.mediaURL resolvingAgainstBaseURL:NO];
+            
+            NSURLQueryItem* identifierItem = [NSURLQueryItem queryItemWithName:@"BEResourceIdentifier" value:item.identifier];
+            
+            NSMutableArray<NSURLQueryItem *> *items = [NSMutableArray arrayWithArray:components.queryItems];
+            
+            [items addObject:identifierItem];
+            
+            components.queryItems = [items copy];
+            
+            item.mediaURL = components.URL;
+        }
+    }
+    
     self.album = album;
     
     self.currentIndex = idx;

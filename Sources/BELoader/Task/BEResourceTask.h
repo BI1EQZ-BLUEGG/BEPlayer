@@ -23,6 +23,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface BEResourceTask : NSObject
 
+/// MD5 标识符
+@property(nonatomic, copy) NSString* key;
+
+/// 自定义标识符
 @property(nonatomic, copy) NSString* identifier;
 
 @property(nonatomic, assign) BOOL isIdle;
