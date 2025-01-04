@@ -15,7 +15,9 @@
 
 static NSString* _Nonnull MediaCacheWorkRootPath = @"MediaCache";
 
-static uint64_t MiniDiskSpace = 1024*1024*1024;//1G
+static uint64_t MiniDiskSpace = 1024*1024*1024; // 1G
+
+static uint64_t BufferLimitSize = 1024*1024; // 1M
 
 typedef NS_ENUM(NSInteger, BEMCFlagType) {
     BEMCFlagTypeSuccess = 0,

@@ -68,7 +68,8 @@ dispatch_queue_t SerialQueue(void){
 }
 
 + (NSString *)URLEncode: (NSString *)encodeString {
-    return  [encodeString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+    NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)encodeString, NULL,CFSTR("!*'();:@&=+$,/?%#[]"), kCFStringEncodingUTF8));
+    return encodedString;
 }
 
 + (NSString *)URLDecode: (NSString *)decodeString {

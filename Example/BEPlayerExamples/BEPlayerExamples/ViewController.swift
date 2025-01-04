@@ -21,10 +21,10 @@ class ViewController: UIViewController {
     
     @IBAction func preloadAction(_ sender: UIButton) {
         let identifiers = mediaURLs.compactMap { url in
-            return URLComponents(string: url)?.queryItems?.first(where: {$0.name == "token"})?.value
+            return URL(string: url)?.pathComponents.joined(separator: "/")
         }
         
-        BEResourceManager.share().preloadGroup("supery", urls: mediaURLs, identifiers: [], expected: 1.0) { group, loaded, failed, total, bytes, totalBytes, loadedTask in
+        BEResourceManager.share().preloadGroup("supery", urls: mediaURLs, identifiers: identifiers, expected: 1.0) { group, loaded, failed, total, bytes, totalBytes, loadedTask in
             print("1 ========", group, loaded, failed, total, bytes, totalBytes)
         } speed: { bps in
             print("2 ========", bps)

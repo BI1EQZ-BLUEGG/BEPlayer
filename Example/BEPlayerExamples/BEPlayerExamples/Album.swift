@@ -7,7 +7,7 @@
 
 import Foundation
 
-let mediaURLs = [
+let mediaURLs3 = [
     "https://mov.bn.netease.com/open-movie/nos/mp4/2018/11/06/SDV09NRJ4_shd.mp4",
     "https://mov.bn.netease.com/open-movie/nos/mp4/2018/11/05/SDUTNPOLV_shd.mp4",
     "https://mov.bn.netease.com/open-movie/nos/mp4/2018/11/02/SDUM9KVDT_shd.mp4",
@@ -79,10 +79,10 @@ let mediaURLs2 = [
     "http://cdn.yixi.tv/o_1bko1k9dmv971tdr1gg0j22nmjg-3.mp4",
 ]
 
-let mediaURLs3 = [
+let mediaURLs = [
     "https://galaxy-api.metamagx.com/storage/v1/object/sign/lessons_audio/lesson/3197f2e7-e74d-4450-b836-43d8a536c93e.mp3?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJsZXNzb25zX2F1ZGlvL2xlc3Nvbi8zMTk3ZjJlNy1lNzRkLTQ0NTAtYjgzNi00M2Q4YTUzNmM5M2UubXAzIiwiaWF0IjoxNzM1ODM0MjczLCJleHAiOjE3MzY0MzkwNzN9.-RAvOWlap7MDbYRQYSdA-esc4y9Qc-Jk8aoMdWaEpps",
-    "https://galaxy-api.metamagx.com/storage/v1/object/sign/lessons_audio/lesson/0d71cee5-db8d-4587-99b2-e4bfa2c7fc90.mp3?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJsZXNzb25zX2F1ZGlvL2xlc3Nvbi8wZDcxY2VlNS1kYjhkLTQ1ODctOTliMi1lNGJmYTJjN2ZjOTAubXAzIiwiaWF0IjoxNzM1ODM0MjczLCJleHAiOjE3MzY0MzkwNzN9.J8AiiXSU7orCt4IB--1U85bingx-qm0qJswzr3m-GCU",
-    "https://galaxy-api.metamagx.com/storage/v1/object/sign/lessons_audio/lesson/c007321c-7aac-4590-a875-07d5b2db8a8c.mp3?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJsZXNzb25zX2F1ZGlvL2xlc3Nvbi9jMDA3MzIxYy03YWFjLTQ1OTAtYTg3NS0wN2Q1YjJkYjhhOGMubXAzIiwiaWF0IjoxNzM1ODM0MjczLCJleHAiOjE3MzY0MzkwNzN9.iB47KUCzEdyjUVvOfPyWBs3qYntvWQ8OhqS0YN4EYzA",
-    "https://galaxy-api.metamagx.com/storage/v1/object/sign/lessons_audio/lesson/28256952-929c-40c6-8550-6623ada07288.mp3?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJsZXNzb25zX2F1ZGlvL2xlc3Nvbi8yODI1Njk1Mi05MjljLTQwYzYtODU1MC02NjIzYWRhMDcyODgubXAzIiwiaWF0IjoxNzM1ODM0MjczLCJleHAiOjE3MzY0MzkwNzN9.2JW-veLxkgFoZ2ptiozlYVQEmouHjSFUVSr-xatkFFw",
-    "https://galaxy-api.metamagx.com/storage/v1/object/sign/lessons_audio/lesson/e154639f-09d8-49cb-9131-c5d9efad63b7.mp3?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJsZXNzb25zX2F1ZGlvL2xlc3Nvbi9lMTU0NjM5Zi0wOWQ4LTQ5Y2ItOTEzMS1jNWQ5ZWZhZDYzYjcubXAzIiwiaWF0IjoxNzM1ODM0MjczLCJleHAiOjE3MzY0MzkwNzN9.ZdE5ZLIPcj_J0K3MpPJQdW-DSci1tWSXep6reL6M7Eg",
+//    "https://galaxy-api.metamagx.com/storage/v1/object/sign/lessons_audio/lesson/0d71cee5-db8d-4587-99b2-e4bfa2c7fc90.mp3?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJsZXNzb25zX2F1ZGlvL2xlc3Nvbi8wZDcxY2VlNS1kYjhkLTQ1ODctOTliMi1lNGJmYTJjN2ZjOTAubXAzIiwiaWF0IjoxNzM1ODM0MjczLCJleHAiOjE3MzY0MzkwNzN9.J8AiiXSU7orCt4IB--1U85bingx-qm0qJswzr3m-GCU",
+//    "https://galaxy-api.metamagx.com/storage/v1/object/sign/lessons_audio/lesson/c007321c-7aac-4590-a875-07d5b2db8a8c.mp3?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJsZXNzb25zX2F1ZGlvL2xlc3Nvbi9jMDA3MzIxYy03YWFjLTQ1OTAtYTg3NS0wN2Q1YjJkYjhhOGMubXAzIiwiaWF0IjoxNzM1ODM0MjczLCJleHAiOjE3MzY0MzkwNzN9.iB47KUCzEdyjUVvOfPyWBs3qYntvWQ8OhqS0YN4EYzA",
+//    "https://galaxy-api.metamagx.com/storage/v1/object/sign/lessons_audio/lesson/28256952-929c-40c6-8550-6623ada07288.mp3?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJsZXNzb25zX2F1ZGlvL2xlc3Nvbi8yODI1Njk1Mi05MjljLTQwYzYtODU1MC02NjIzYWRhMDcyODgubXAzIiwiaWF0IjoxNzM1ODM0MjczLCJleHAiOjE3MzY0MzkwNzN9.2JW-veLxkgFoZ2ptiozlYVQEmouHjSFUVSr-xatkFFw",
+//    "https://galaxy-api.metamagx.com/storage/v1/object/sign/lessons_audio/lesson/e154639f-09d8-49cb-9131-c5d9efad63b7.mp3?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJsZXNzb25zX2F1ZGlvL2xlc3Nvbi9lMTU0NjM5Zi0wOWQ4LTQ5Y2ItOTEzMS1jNWQ5ZWZhZDYzYjcubXAzIiwiaWF0IjoxNzM1ODM0MjczLCJleHAiOjE3MzY0MzkwNzN9.ZdE5ZLIPcj_J0K3MpPJQdW-DSci1tWSXep6reL6M7Eg",
 ]

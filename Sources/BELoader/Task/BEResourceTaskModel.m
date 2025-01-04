@@ -19,7 +19,7 @@
         
         _dataBuffer = [NSMutableData new];
         
-        _bufferLimitSize = 10 * 1024;
+        _bufferLimitSize = 1024*1024;
         
         _status = BEResourceTaskStatusPending;
     }

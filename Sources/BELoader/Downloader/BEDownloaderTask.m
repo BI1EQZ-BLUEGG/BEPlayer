@@ -99,7 +99,7 @@ static NSDictionary* ntMap;
                 }
             };
         }
-        _bufferLimitSize = 3 * 1024;
+        _bufferLimitSize = BufferLimitSize;
         
         _offset = 0;
         

@@ -162,22 +162,11 @@ class BEPlayerViewController: UIViewController {
 
     func setup() {
         
-        var identifiers = mediaURLs.compactMap { url in
-            return URLComponents(string: url)?.queryItems?.first(where: {$0.name == "token"})?.value
-        }
         var album: [BEPlayerItem] = []
-        if identifiers.isEmpty {
-            for url in mediaURLs {
-                let item = BEPlayerItem(url: URL(string: url)!)
+        for url in mediaURLs {
+            if let uurl = URL(string: url) {
+                let item = BEPlayerItem(url: uurl, identifier: uurl.pathComponents.joined(separator: "/"))
                 item.title = url
-                album.append(item)
-            }
-        } else {
-            for i in 0..<mediaURLs.count {
-                let url = mediaURLs[i]
-                let identifier = identifiers[i]
-                let item = BEPlayerItem(url: URL(string: url)!, identifier: identifier)
-                item.title = identifier + "@" + url
                 album.append(item)
             }
         }
