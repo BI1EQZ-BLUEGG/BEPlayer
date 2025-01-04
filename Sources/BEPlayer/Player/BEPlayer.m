@@ -124,7 +124,7 @@
     
     for (BEPlayerItem* item in album) {
         // 如果配置了 identifier，则将其追加到 URL 参数中，用于 ResourceLoader 中解析标识符
-        NSString* identifier = item.identifier;
+        NSString* identifier = [item.identifier stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
         
         if ([identifier isKindOfClass:[NSString class]] && identifier.length > 0) {
             

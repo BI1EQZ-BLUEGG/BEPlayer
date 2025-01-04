@@ -17,6 +17,10 @@ dispatch_queue_t IOQueue(void);
 
 + (NSString *)md5:(NSString *)string;
 
++ (NSString *)URLEncode: (NSString *)encodeString;
+
++ (NSString *)URLDecode: (NSString *)decodeString;
+
 + (NSRange )rangeOfRequest:(NSURLRequest *)request;
 
 + (NSRange )rangeOfResponse:(NSURLResponse *)response;

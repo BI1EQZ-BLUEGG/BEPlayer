@@ -67,6 +67,14 @@ dispatch_queue_t SerialQueue(void){
     return [key uppercaseString];
 }
 
++ (NSString *)URLEncode: (NSString *)encodeString {
+    return  [encodeString stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLQueryAllowedCharacterSet]];
+}
+
++ (NSString *)URLDecode: (NSString *)decodeString {
+    return [decodeString stringByRemovingPercentEncoding];
+}
+
 + (NSRange)rangeOfRequest:(NSURLRequest *)request {
     
     NSArray* rangeSegs = [[[request.allHTTPHeaderFields[@"Range"] componentsSeparatedByString:@"="] lastObject] componentsSeparatedByString:@"-"];

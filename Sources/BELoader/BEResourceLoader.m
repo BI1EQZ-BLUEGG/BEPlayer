@@ -245,7 +245,7 @@ static dispatch_once_t onceToken;
         
         if ([item.name isEqualToString:@"BEResourceIdentifier"]) {
             
-            identifier = item.value;
+            identifier = [BETool URLDecode:item.value];
             
             break;
         }
