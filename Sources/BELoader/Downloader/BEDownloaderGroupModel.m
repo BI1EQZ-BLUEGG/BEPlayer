@@ -44,7 +44,7 @@
     
     _groupProgressBlock = nil;
     
-    printf("%s %s\n", __func__, _groupName.UTF8String);
+//    printf("%s %s\n", __func__, _groupName.UTF8String);
 }
 
 - (instancetype)init {

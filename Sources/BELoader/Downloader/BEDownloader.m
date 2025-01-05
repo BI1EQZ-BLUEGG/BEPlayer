@@ -36,7 +36,7 @@
                                                     name:@"BECache_cleanAll"
                                                   object:nil];
 
-    printf("%s\n", __func__);
+//    printf("%s\n", __func__);
 }
 
 - (instancetype)init {
@@ -576,7 +576,7 @@
                             identifiers:nil
                                orGroups:groups
                              onComplete:^{
-                               printf("abc\n");
+//                               printf("abc\n");
                              }];
           }
 

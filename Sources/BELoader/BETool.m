@@ -332,7 +332,7 @@ dispatch_queue_t SerialQueue(void){
     
     NSString* str = [NSByteCountFormatter stringFromByteCount:tmp/container.count countStyle:NSByteCountFormatterCountStyleFile];
     
-    printf("%s\\s\n", str.UTF8String);
+//    printf("%s\\s\n", str.UTF8String);
     
     if (tmp == 0) {
         

@@ -52,7 +52,7 @@ static dispatch_once_t onceToken;
     
     onceToken = 0;
     
-    printf("%s\n", __func__);
+//    printf("%s\n", __func__);
 }
 
 - (instancetype)init {
@@ -145,7 +145,7 @@ static dispatch_once_t onceToken;
         
         return YES;
     }else{
-        printf("resource loader something error\n");
+//        printf("resource loader something error\n");
     }
     return NO;
 }
@@ -201,7 +201,7 @@ static dispatch_once_t onceToken;
 
             [task cancelRequest:loadingRequest forResourceLoaderIdentifier:[NSString stringWithFormat:@"%p",resourceLoader]];
         }else{
-            printf("resource loader cancel nil\n");
+//            printf("resource loader cancel nil\n");
         }
     });
 }

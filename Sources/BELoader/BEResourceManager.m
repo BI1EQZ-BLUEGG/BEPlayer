@@ -32,7 +32,7 @@
 
 - (void)dealloc {
 
-    printf("%s\n", __func__);
+//    printf("%s\n", __func__);
 }
 
 - (instancetype)init {

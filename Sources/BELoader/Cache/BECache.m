@@ -38,7 +38,7 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIApplicationDidReceiveMemoryWarningNotification object:nil];
     
-    printf("%s\n", __func__);
+//    printf("%s\n", __func__);
 }
 
 - (instancetype)init {
