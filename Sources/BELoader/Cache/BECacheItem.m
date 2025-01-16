@@ -44,7 +44,7 @@ BOOL ContainRange(NSRange srcRange, NSRange dstRange) {
 
 - (void)dealloc{
     
-    printf("%s\n", __func__);
+//    printf("%s\n", __func__);
     
     [_fileHandle closeFile];
     

@@ -30,7 +30,7 @@
     
     _remoteTask = nil;
     
-    printf("%s\n", __func__);
+//    printf("%s\n", __func__);
 }
 
 - (instancetype)init {
@@ -48,11 +48,11 @@
 
 #pragma mark - SET/GET
 
-- (void)setIdentifier:(NSString *)identifier {
+- (void)setKey:(NSString *)key {
     
-    _identifier = identifier;
-
-    _localTask.localIdentifier = _remoteTask.remoteIdentifier = identifier;
+    _key = key;
+    
+    _localTask.localIdentifier = _remoteTask.remoteIdentifier = key;
 }
 
 #pragma mark - Public

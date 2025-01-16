@@ -31,7 +31,7 @@
     
     _session = nil;
     
-    printf("%s\n", __func__);
+//    printf("%s\n", __func__);
 }
 
 - (instancetype)init {
@@ -272,7 +272,8 @@ didReceiveResponse:(NSURLResponse *)response
         
         contentInformationRequest.byteRangeAccessSupported = byteRangeAccessSupported;
         
-        if (byteRangeAccessSupported && contentLength > 0 && _totalLength == -1) {
+        // 变更：只要有一个满足即认为支持 Range 请求
+        if ((byteRangeAccessSupported || contentLength > 0) && _totalLength == -1) {
             
             [[BECache share] updateContentInfo:[info copy] identifier:self.remoteIdentifier onComplete:^(NSData *data, NSString *identifier, BEMCFlagType flag) {}];
         }

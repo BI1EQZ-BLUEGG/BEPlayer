@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BELoader
 
 class ViewController: UIViewController {
 
@@ -13,11 +14,31 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
     }
-
     
     @IBAction func push(_ sender: Any) {
         navigationController?.pushViewController(BEPlayerViewController(), animated: true) 
     }
     
+    @IBAction func preloadAction(_ sender: UIButton) {
+        let identifiers = mediaURLs.compactMap { url in
+            return URL(string: url)?.pathComponents.joined(separator: "/")
+        }
+        
+        BEResourceManager.share().preloadGroup("supery", urls: mediaURLs, identifiers: identifiers, expected: 1.0) { group, loaded, failed, total, bytes, totalBytes, loadedTask in
+            print("1 ========", group, loaded, failed, total, bytes, totalBytes)
+        } speed: { bps in
+            print("2 ========", bps)
+        } complete: { result, metrics in
+            print("3 ========", "all: ", (result["all"] as! Array<Any>).count, "failed: ",(result["failed"] as! Array<Any>).count, "loaded: ", (result["loaded"] as! Array<Any>).count, "-------->", metrics.compactMap({($0.value as? [String: Any])?.compactMap({$0})}))
+        }
+    }
+    
+    @IBAction func clean(_ sender: UIButton) {
+        print("cache size", BEResourceManager.share().cacheSize())
+        BEResourceManager.share().cleanAll {
+            print("clean finished")
+            print("cache size", BEResourceManager.share().cacheSize())
+        }
+    }
 }
 

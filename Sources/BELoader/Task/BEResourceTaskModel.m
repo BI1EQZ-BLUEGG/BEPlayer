@@ -11,7 +11,7 @@
 
 - (void)dealloc{
     
-    printf("%s\n", __func__);
+//    printf("%s\n", __func__);
 }
 - (instancetype)init {
     
@@ -19,7 +19,7 @@
         
         _dataBuffer = [NSMutableData new];
         
-        _bufferLimitSize = 10 * 1024;
+        _bufferLimitSize = 1024*1024;
         
         _status = BEResourceTaskStatusPending;
     }

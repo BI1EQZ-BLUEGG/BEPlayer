@@ -67,6 +67,15 @@ dispatch_queue_t SerialQueue(void){
     return [key uppercaseString];
 }
 
++ (NSString *)URLEncode: (NSString *)encodeString {
+    NSString *encodedString = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (__bridge CFStringRef)encodeString, NULL,CFSTR("!*'();:@&=+$,/?%#[]"), kCFStringEncodingUTF8));
+    return encodedString;
+}
+
++ (NSString *)URLDecode: (NSString *)decodeString {
+    return [decodeString stringByRemovingPercentEncoding];
+}
+
 + (NSRange)rangeOfRequest:(NSURLRequest *)request {
     
     NSArray* rangeSegs = [[[request.allHTTPHeaderFields[@"Range"] componentsSeparatedByString:@"="] lastObject] componentsSeparatedByString:@"-"];
@@ -138,6 +147,8 @@ dispatch_queue_t SerialQueue(void){
     
     BOOL byteRangeAccessSupported = NO;
     
+    BOOL validContentRange = NO;
+    
     long long contentLength = 0;
     
     NSRange range = NSMakeRange(0, 0);
@@ -158,6 +169,8 @@ dispatch_queue_t SerialQueue(void){
         byteRangeAccessSupported = [acceptRange isEqualToString:@"bytes"];
         
         NSString* contentRange = HTTPURLResponse.allHeaderFields[@"Content-Range"]?:@"";
+        
+        validContentRange = contentRange.length > 0;
         
         NSError* error;
         
@@ -182,8 +195,8 @@ dispatch_queue_t SerialQueue(void){
             range.length = contentLength - range.location;
         }
     }
-
-    if (!byteRangeAccessSupported) {
+    
+    if (!byteRangeAccessSupported && !validContentRange) {
         
         if (error != NULL) {
             
@@ -200,7 +213,8 @@ dispatch_queue_t SerialQueue(void){
                                          @"byteRangeAccessSupported":@(byteRangeAccessSupported),
                                          @"createTime":@(time(NULL)),
                                          @"range":[NSValue valueWithRange:range],
-                                         @"extension":extension
+                                         @"extension":extension,
+                                         @"validContentRange": @(validContentRange),
                                      }];
         return info;
     }else{
@@ -318,7 +332,7 @@ dispatch_queue_t SerialQueue(void){
     
     NSString* str = [NSByteCountFormatter stringFromByteCount:tmp/container.count countStyle:NSByteCountFormatterCountStyleFile];
     
-    printf("%s\\s\n", str.UTF8String);
+//    printf("%s\\s\n", str.UTF8String);
     
     if (tmp == 0) {
         

@@ -52,7 +52,7 @@ static dispatch_once_t onceToken;
     
     onceToken = 0;
     
-    printf("%s\n", __func__);
+//    printf("%s\n", __func__);
 }
 
 - (instancetype)init {
@@ -117,7 +117,11 @@ static dispatch_once_t onceToken;
         
         if (oldUrl) {
             
-            NSString* key = [BETool md5:[ws fixScheme:[NSURL URLWithString:oldUrl]].absoluteString];
+            NSString* urlString = [ws fixScheme:[NSURL URLWithString:oldUrl]].absoluteString;
+            
+            NSString* identifier = [ws identifierWithURL:urlString];
+            
+            NSString* key = [BETool md5: identifier.length > 0 ? identifier : urlString];
             
             BEResourceTask* task = ws.loadingTasks[key];
             
@@ -136,19 +140,25 @@ static dispatch_once_t onceToken;
         
         dispatch_async(SerialQueue(), ^{
             
-            [ws ae_resourceLoader:resourceLoader shouldWaitForLoadingOfRequestedResource:loadingRequest];
+            [ws beResourceLoader:resourceLoader shouldWaitForLoadingOfRequestedResource:loadingRequest];
         });
         
         return YES;
     }else{
-        printf("resource loader something error\n");
+//        printf("resource loader something error\n");
     }
     return NO;
 }
 
-- (void)ae_resourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest {
+- (void)beResourceLoader:(AVAssetResourceLoader *)resourceLoader shouldWaitForLoadingOfRequestedResource:(AVAssetResourceLoadingRequest *)loadingRequest {
     
-    NSString* key = [BETool md5:[self fixScheme:loadingRequest.request.URL].absoluteString];
+    NSURL* url = loadingRequest.request.URL;
+    
+    NSString* urlString = [self fixScheme:url].absoluteString;
+    
+    NSString* identifier = [self identifierWithURL:urlString];
+    
+    NSString* key = [BETool md5: identifier.length > 0 ? identifier : urlString];
     
     BEResourceTask* task = self.loadingTasks[key];
     
@@ -158,7 +168,7 @@ static dispatch_once_t onceToken;
         
         newTask.delegate = self;
         
-        newTask.identifier = key;
+        newTask.key = key;
         
         newTask.isIdle = NO;
     
@@ -177,7 +187,13 @@ static dispatch_once_t onceToken;
     
     dispatch_async(SerialQueue(), ^{
         
-        NSString* key = [BETool md5:[ws fixScheme:loadingRequest.request.URL].absoluteString];
+        NSURL* url = loadingRequest.request.URL;
+        
+        NSString* urlString = [ws fixScheme:url].absoluteString;
+        
+        NSString* identifier = [ws identifierWithURL:urlString];
+        
+        NSString* key = [BETool md5: identifier.length > 0 ? identifier : urlString];
 
         BEResourceTask* task = ws.loadingTasks[key];
 
@@ -185,7 +201,7 @@ static dispatch_once_t onceToken;
 
             [task cancelRequest:loadingRequest forResourceLoaderIdentifier:[NSString stringWithFormat:@"%p",resourceLoader]];
         }else{
-            printf("resource loader cancel nil\n");
+//            printf("resource loader cancel nil\n");
         }
     });
 }
@@ -214,4 +230,27 @@ static dispatch_once_t onceToken;
     
     return httpURL;
 }
+
+//查看参数中的　identifier
+- (NSString *)identifierWithURL:(NSString *)urlString {
+    
+    NSURL *url = [NSURL URLWithString:urlString];
+    
+    NSURLComponents* components = [NSURLComponents componentsWithURL:url resolvingAgainstBaseURL:NO];
+    
+    NSString* identifier = @"";
+    
+    // 查找自定义标识
+    for (NSURLQueryItem* item in components.queryItems) {
+        
+        if ([item.name isEqualToString:@"BEResourceIdentifier"]) {
+            
+            identifier = [BETool URLDecode:item.value];
+            
+            break;
+        }
+    }
+    return identifier;
+}
+
 @end
